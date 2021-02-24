@@ -56,6 +56,10 @@
 \newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
 \makeatother
 \usepackage{amsmath}
+\usepackage{amssymb}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\EX}{\mathbb{E}}
 \usepackage{graphicx}
 \usepackage{float}
 % Some Computer Society conferences also require the compsoc mode option,
@@ -518,6 +522,8 @@
 		\input{fundamental-knowledge.tex}
 	\section{Meta-Gradient Reinforcement Learning}
 		\input{meta-gradient.tex}
+	\section{Evolved Policy Gradient}
+		\input{evolved-policy-gradient.tex}
 	\section{MAML}
 		\input{maml.tex}
 	
@@ -573,6 +579,9 @@
 		Zhongwen Xu, Hado van Hasselt and David Silver, \emph{Meta-Gradient Reinforcement Learning}.
 		\url{URL: https://proceedings.neurips.cc/paper/2018/file/2715518c875999308842e3455eda2fe3-Paper.pdf}
 		
+		\bibitem{epg}
+		Rein Houthooft, Richard Y. Chen, Phillip Isola, Bradly C. Stadie, Filip Wolski, Jonathan Ho, Pieter Abbeel, \emph{Evolved Policy Gradients}.
+		\url{URL: https://papers.nips.cc/paper/2018/file/7876acb66640bad41f1e1371ef30c180-Paper.pdf}
 	\end{thebibliography}
 	
 	
