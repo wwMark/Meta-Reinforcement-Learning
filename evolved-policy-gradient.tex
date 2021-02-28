@@ -5,7 +5,7 @@ EPG contains an inner loop and an outer loop during its execution. In inner loop
 
 \[\theta^* = \argmin_\theta\EX_{\tau\thicksim\mathcal{M},\pi_\theta}[L_\phi(\pi_\theta,\tau)]\]
 
-where $\theta^*$ is the updated parameter $\theta$, $\mathcal{M}$ is a sampled markov decision process, $\tau$ is an episode of $\mathcal{M}$ with horizon $\textit{H}$. The objective of the inner loop is to minimize the loss function $L_\phi$. In outer loop, the loss function parameter $\phi$ is updated as shown below:
+where $\theta^*$ is the updated parameter $\theta$, $\mathcal{M}$ is a sampled Markov decision process, $\tau$ is an episode of $\mathcal{M}$ with horizon $\textit{H}$. The objective of the inner loop is to minimize the loss function $L_\phi$. In outer loop, the loss function parameter $\phi$ is updated as shown below:
 
 \[\phi^* = \argmax_\phi\EX_{\mathcal{M}\thicksim p(\mathcal{M})}\EX_{\tau\thicksim\mathcal{M},\pi_{\theta^*}}[R_\tau]\]
 

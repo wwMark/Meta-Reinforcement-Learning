@@ -62,6 +62,7 @@
 \DeclareMathOperator{\EX}{\mathbb{E}}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage[section]{placeins}
 % Some Computer Society conferences also require the compsoc mode option,
 % but others use the standard conference format.
 %
@@ -518,8 +519,8 @@
 	% footnotes above bottom floats. This can be corrected via the
 	% \fnbelowfloat command of the stfloats package.
 	
-	\section{Fundamental Knowledge}
-		\input{fundamental-knowledge.tex}
+	\section{Preliminaries}
+		\input{preliminaries.tex}
 	\section{Meta-Gradient Reinforcement Learning}
 		\input{meta-gradient.tex}
 	\section{Evolved Policy Gradient}
@@ -575,12 +576,18 @@
 		%H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 		%0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
 		
-		\bibitem{meta-gradient}
-		Zhongwen Xu, Hado van Hasselt and David Silver, \emph{Meta-Gradient Reinforcement Learning}.
-		\url{URL: https://proceedings.neurips.cc/paper/2018/file/2715518c875999308842e3455eda2fe3-Paper.pdf}
 		
 		\bibitem{n-step-return}
 		R. S. Sutton and A. G. Barto., \emph{Reinforcement learning: An introduction}.
+		
+		\bibitem{meta-model}
+		Matthew Botvinick, Sam Ritter, Jane X. Wang, Zeb Kurth-Nelson, Charles Blundell, and
+		Demis Hassabis, \emph{Reinforcement Learning, Fast and Slow}.
+		\url{URL: https://www.cell.com/action/showPdf?pii=S1364-6613%2819%2930061-0}
+		
+		\bibitem{meta-gradient}
+		Zhongwen Xu, Hado van Hasselt and David Silver, \emph{Meta-Gradient Reinforcement Learning}.
+		\url{URL: https://proceedings.neurips.cc/paper/2018/file/2715518c875999308842e3455eda2fe3-Paper.pdf}
 		
 		\bibitem{lambda-return}
 		R. S. Sutton, \emph{Learning to predict by the methods of temporal differences}.
