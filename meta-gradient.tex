@@ -1,26 +1,29 @@
-One of the algorithm in meta reinforcement learning is the meta-gradient reinforcement learning introduced in \cite{meta-gradient} by Google DeepMind. In deep reinforcement learning, the environment model is often unknown to the agent. Therefore, the true value function has to be approximated by a function known as \textit{return} with parameter $\theta$. This return function plays an important role in determining the characteristics of the reinforcement learning algorithm. Usually, the return function is parameterised by a discount factor $\gamma$ and the bootstrapping parameter $\lambda$. In \cite{meta-gradient}, it is defined as shown below:
+One of the algorithm in meta reinforcement learning is the meta-gradient reinforcement learning introduced in \cite{meta-gradient} by Google DeepMind. The main idea of this algorithm is to update the meta-parameters $\eta$ to achieve a better learning performance. The details of this algorithm is presented in this section.
 
-\begin{math}
-	\begin{aligned}
-		G_\eta^{(n)}(\tau_t) &= R_{t+1} + \gamma R_{t+2} + \dots + \gamma^{n-1}R_{t+n} + \gamma^n v_\theta(s_{t+n})\\
-		G_\eta^{\lambda}(\tau_t) &= (1-\lambda) \sum_{n=1}^\infty \lambda^{n-1} G_\eta^{(n)}
-	\end{aligned}
-\end{math}
+\par
+In deep reinforcement learning, the environment model is often unknown to the agent. Therefore, the true value function has to be approximated by a function known as \textit{return} with parameter $\theta$. This return function plays an important role in determining the characteristics of the reinforcement learning algorithm. Usually, the return function is parameterised by a discount factor $\gamma$ and the bootstrapping parameter $\lambda$, which are denoted as meta-parameters $\eta$ in this paper. Throughout normal training process, these two parameters $\gamma$ and $\lambda$ are hand-selected and held fixed. Following are the \textit{n}-step return\cite{n-step-return} depending on fixed $\gamma$:
 
-The two parameters are hand-selected and held fixed throughout training. In \cite{meta-gradient}, these parameters are denoted by $\eta = \{\gamma, \lambda\}$ and $\theta$ is updated by the following formula, taking $\eta$ into account:
+\[g_{\eta}\left(\tau_{t}\right)=R_{t+1}+\gamma R_{t+2}+\ldots,+\gamma^{n-1} R_{t+n}+\gamma^{n} v_{\theta}\left(S_{t+n}\right)\]
+
+where $\eta = \{\gamma\}$ and the $\lambda$ return\cite{lambda-return} depending on fixed $\gamma$ and $\lambda$:
+
+\[g_{\eta}\left(\tau_{t}\right)=R_{t+1}+\gamma(1-\lambda) v_{\theta}\left(S_{t+1}\right)+\gamma \lambda g_{\eta}\left(\tau_{t+1}\right)\]
+
+where $\eta = \{\gamma, \lambda\}$. In addition, the parameter $\theta$ is also updated by the following formula, taking fixed $\eta$ into account:
 
 \[\theta' = \theta + f(\tau, \theta, \eta)\]
 
 where $\tau$ is the sample of experience being considered.
 
 \par
-In order to achieve better performance, $\eta$ is also updated in the training process. A meta-objective defined as follows is used to define the rule to update $\eta$:
+In order to achieve better performance, the algorithm introduced in \cite{meta-gradient} updates $\eta$ during the training process. Besides an objective function $J(\tau, \theta, \eta)$, whose value the parameter $\theta$ is being updated to reduce, a meta-objective defined as $\bar{J}\left(\tau^{\prime}, \theta^{\prime}, \bar{\eta}\right)$ is also included into this algorithm and the purpose of updating $\eta$ is to increase its value.
 
-\[\bar{J}(\tau', \theta', \bar{\eta}) = (g_{\bar{\eta}}(\tau') - v_\theta'(S'))^2\]
+\par
+Here is how the algorithm works: First, the algorithm starts with parameter $\theta$ and applies the update function on the first sample, resulting in a updated parameter $\theta'$. After that, the performance is measured by $\bar{J}(\tau', \theta', \bar{\eta})$, where $\tau'$ is the next sample following $\tau$ and $\bar{\eta}$ is a fixed meta-parameter. Then, the gradient of the meta-objective with respect to the meta-parameters $\eta$ is obtained by applying the chain rule:
 
-where $\tau'$ is the next sample and $\theta'$ is the updated parameter $\theta$.
+\[\frac{\partial \bar{J}\left(\tau^{\prime}, \theta^{\prime}, \bar{\eta}\right)}{\partial \eta}=\frac{\partial \bar{J}\left(\tau^{\prime}, \theta^{\prime}, \bar{\eta}\right)}{\partial \theta^{\prime}} \frac{\mathrm{d} \theta^{\prime}}{\mathrm{d} \eta}\]
 
-$\Delta\eta$ is defined below:
+Finally, $\Delta\eta$ is calculated to maximize the meta-objective:
 
 \[\Delta \eta = -\beta \frac{\partial \bar{J}(\tau', \theta', \bar{\eta})}{\partial \theta'} \frac{\partial f(\tau, \theta, \eta)}{d\eta}\]
 
