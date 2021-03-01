@@ -27,7 +27,7 @@ The key point behind this approach is the transferability of internal representa
 	\label{MAML}
 \end{figure}
 
-%The principle of the algorithm refers to gradient by gradient，which means two gradient descents are conducted during the meta-training process. When applied to new tasks, the parameters of model $\theta$ become $\theta_{i}^{\prime}$. The updated parameter vector $\theta_{i}^{\prime}$ is computed by doing the first gradient descent on each task $\mathcal{T}_{i}$ among batch of tasks, which is denoted as:
+The principle of the algorithm refers to gradient by gradient，which means two gradient descents are conducted during the meta-training process. When applied to new tasks, the parameters of model $\theta$ become $\theta_{i}^{\prime}$. The updated parameter vector $\theta_{i}^{\prime}$ is computed by doing the first gradient descent on each task $\mathcal{T}_{i}$ among batch of tasks, which is denoted as:
 
 $$\theta_{i}^{\prime}=\theta-\alpha \nabla_{\theta} \mathcal{L}_{\mathcal{T}_{i}}\left(f_{\theta}\right)$$
 where $\alpha$ represents step size fixed as hyperparameter and $\mathcal{L}_{\mathcal{T}_{i}}$ is loss of corresponding task.
