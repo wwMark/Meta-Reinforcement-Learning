@@ -406,12 +406,15 @@
 	
 	\section{Introduction}
 	% no \IEEEPARstart
-	This demo file is intended to serve as a ``starter file''
-	for IEEE conference papers produced under \LaTeX\ using
-	IEEEtran.cls version 1.8b and later.
+	Reinforcement learning is an area of machine learning and concentrates on training an intelligent agent with an optimal strategy to interact with the environment so that a maximal future reward can be achieved. Like the other areas of machine learning, reinforcement learning algorithms needs a large number of samples to train the agent. But in real life, enough number of samples can not be easily obtained, while we also hope to train the model with better performance and less time. Therefore, meta learning, which is also a subfield of machine learning, is deployed into reinforcement learning to address such problems. There are three common approaches in meta learning: model-based approach, metric-based approach and optimization-based approach. In this report, we focus on the optimization-based meta learning approach for reinforcement learning.
+	\par
+	Usually, in a reinforcement learning task, the agent is trained with some fixed parameter during training process. But in optimization-based meta learning, these parameters can also be trained and adapted in the training, because such a model can be split into two stages and be viewed as learner, which is being trained to obtain optimal rewards for given samples, and meta-learner, which updates the learner model's parameters and accelerates the convergence, respectively. With optimization-based meta learning, fewer samples are needed to train the agent who is learning with gradient-based method due to the adaption of model meta-parameters, and the training time can also be reduced accordingly.
+	\par
+	In this report, some fundamental knowledge about meta reinforcement learning is first presented in section \rom{2}. Then, algorithms of meta learning hyperparameters and loss function will be presented in section \rom{3}, \rom{4}. Afterwards, MAML and MAESN are introduced in section \rom{5}, \rom{6}. Finally, conclusion is drawn in section \rom{7}.
+	
 	% You must have at least 2 lines in the paragraph with the drop letter
 	% (should never be an issue)
-	I wish you the best of success.
+	
 	
 	%\hfill mds
 	
@@ -532,7 +535,14 @@
 	
 	
 	\section{Conclusion}
-	The conclusion goes here.
+	In this article we took a research on meta reinforcement learning, by which meta-learning is performed in the field of reinforcement learning. The aim is to help optimize the model to solve unseen tasks in the minimum amount of time. We analysed four gradient-based algorithms of meta reinforcement learning, which are Meta-Gradient Reinforcement Learning, Evolved Policy Gradient, MAML and MAESN respectively.
+	
+	%The key point of Meta-Gradient Reinforcement Learning is to achieve a better learning performance by updating the meta-parameters $\eta$. And Evolved Policy Gradients is the method that evolves the loss function of learning agents, which can enable fast training on novel tasks.这块我大概写了一些，不是太了解，你可以修改一下
+	
+	As an essential meta-learning approach, Model-Agnostic Meta-Learning (MAML) can enable an agent to quickly acquire a policy for a new test task using only a small amount of experience. On the one hand it is model agnostic, on the other hand it can be combined with any model representation
+    that is optimized by gradient descent.
+    
+    Additionally, Model Agnostic Exploration with Structured Noise (MAESN) is a combination of structured stochasticity and MAML. The advantage lies in that with the help of latent space, that injects coherent stochasticity into the policy, MAESN is able to provide a structured exploration behavior and to achieve fast adaptation on new task during meta-test time.
 	
 	
 	
@@ -597,6 +607,21 @@
 		\bibitem{epg}
 		Rein Houthooft, Richard Y. Chen, Phillip Isola, Bradly C. Stadie, Filip Wolski, Jonathan Ho, Pieter Abbeel, \emph{Evolved Policy Gradients}.
 		\url{URL: https://papers.nips.cc/paper/2018/file/7876acb66640bad41f1e1371ef30c180-Paper.pdf}
+		
+		\bibitem{MAML}
+		Chelsea Finn, Pieter Abbee, Sergey Levine, \emph{Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks}.
+		\url{https://arxiv.org/pdf/1703.03400.pdf}
+		
+		\bibitem{MAML}
+		Marcin Andrychowicz, Misha Denil,  Sergio Gómez Colmenarejo, Matthew W. Hoffman, David Pfau, Tom Schau, Brendan Shillingford,
+		Nando de Freitas, \emph{Learning to learn by gradient descent
+by gradient descent}.
+		\url{https://arxiv.org/pdf/1606.04474.pdf}
+		
+		\bibitem{MAML}
+		Ravi, Sachin and Larochelle, Hugo, \emph{Optimization as a model for few-shot learning}.
+		\url{https://openreview.net/pdf?id=rJY0-Kcll}
+		
 	\end{thebibliography}
 	
 	
