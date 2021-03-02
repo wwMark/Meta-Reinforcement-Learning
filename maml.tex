@@ -69,7 +69,7 @@ Wenn MAML is applied to reinforcement learning, the core idea and the algorithm 
 In terms of structure, algorithm 3 has no difference with algorithm 1. 
 In $K$ -shot reinforcement learning, $K$ trajectories are sampled from the environment, so that the updated parameters $\theta_{i}^{\prime}$ can be calculated by gradient descent. And the second gradient is performed on a new set of trajectories, that leads to real update of model parameters. Additionally, policy gradient methods are used here to estimate two gradients because the reward is not differentiable due to unknown dynamics. 
 
-Several experiments are conducted to evaluate the performance of MAML on reinforcement learning tasks. Among these experiments a neural network policy is trained as model with  two hidden layers of size 100, and ReLU nonlinearities.
+Several experiments are conducted to evaluate the performance of MAML on reinforcement learning tasks. Among these experiments a neural network policy is trained as model with  two hidden layers of size 100, and ReLU nonlinearities. The gradient updates are computed using vanilla policy gradient (REINFORCE) [9], and we use trust-region policy optimization (TRPO) [10] as the meta-optimizer
 
 The first meta-RL evaluation is in the domain of 2$D$ Navigation, where  a goal position, that a point agent is expected to reach, is chosen randomly in a unit square. The state is the current 2$D$position, and actions correspond to velocity control in the range [−0.1, 0.1]. What's more, the reward is the negative squared distance to the goal. The aim is to maximize the return by training neural network policy with the architecture of MAML.
 
@@ -82,7 +82,7 @@ The first meta-RL evaluation is in the domain of 2$D$ Navigation, where  a goal 
 
 The results of four approaches for adaptation on new tasks are showed in Figure 10. They are model that is initialized with MAML, conventional pretraining on the same set of tasks, random initialization, and an oracle policy that receives the goal position as input. We can easily find out that the model learned with MAML obviously outperforms the other three algorithms.
 
-The other more complex evaluation is called locomotion, where two different robots, half  cheetah and ant, run in a particular direction or at a particular velocity. The reward in the goal velocity experiments is the negative absolute value between the current velocity of
+The other more complex evaluation is performed on high-dimensional locomotion tasks with the MuJoCo simulator [11], by which two different robots, half  cheetah and ant, run in a particular direction or at a particular velocity. The reward in the goal velocity experiments is the negative absolute value between the current velocity of
 the agent and a random goal, while In the goal direction experiments we consider the magnitude of the velocity in either the forward or backward direction as the reward.
 
 \begin{figure}[H]
