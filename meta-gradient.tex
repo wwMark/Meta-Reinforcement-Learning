@@ -5,11 +5,11 @@ In deep reinforcement learning, the environment model is often unknown to the ag
 
 \[g_{\eta}\left(\tau_{t}\right)=R_{t+1}+\gamma R_{t+2}+\ldots,+\gamma^{n-1} R_{t+n}+\gamma^{n} v_{\theta}\left(S_{t+n}\right)\]
 
-where $\eta = \{\gamma\}$ and the $\lambda$ return\cite{lambda-return} depending on fixed $\gamma$ and $\lambda$:
+where $\eta = \{\gamma\}$, \textit{t} is the current time step, and the $\lambda$ return\cite{lambda-return} depending on fixed $\gamma$ and $\lambda$:
 
 \[g_{\eta}\left(\tau_{t}\right)=R_{t+1}+\gamma(1-\lambda) v_{\theta}\left(S_{t+1}\right)+\gamma \lambda g_{\eta}\left(\tau_{t+1}\right)\]
 
-where $\eta = \{\gamma, \lambda\}$. In addition, the parameter $\theta$ is also updated by the following formula, taking fixed $\eta$ into account:
+where $\eta = \{\gamma, \lambda\}$. In addition, the parameter $\theta$ is updated by the following formula, taking fixed $\eta$ into account:
 
 \[\theta' = \theta + f(\tau, \theta, \eta)\]
 
@@ -19,18 +19,25 @@ where $\tau$ is the sample of experience being considered.
 In order to achieve better performance, the algorithm introduced in \cite{meta-gradient} updates $\eta$ during the training process. Besides an objective function $J(\tau, \theta, \eta)$, whose value the parameter $\theta$ is being updated to reduce, a meta-objective defined as $\bar{J}\left(\tau^{\prime}, \theta^{\prime}, \bar{\eta}\right)$ is also included into this algorithm and the purpose of updating $\eta$ is to increase its value.
 
 \par
-Here is how the algorithm works: First, the algorithm starts with parameter $\theta$ and applies the update function on the first sample, resulting in a updated parameter $\theta'$. After that, the performance is measured by $\bar{J}(\tau', \theta', \bar{\eta})$, where $\tau'$ is the next sample following $\tau$ and $\bar{\eta}$ is a fixed meta-parameter. Then, the gradient of the meta-objective with respect to the meta-parameters $\eta$ is obtained by applying the chain rule:
+Here is how the algorithm works: First, the algorithm starts with parameter $\theta$ and applies the update function on the first sample, resulting in an updated parameter $\theta'$. After that, the performance is measured by $\bar{J}(\tau', \theta', \bar{\eta})$, where $\tau'$ is the next sample following $\tau$ and $\bar{\eta}$ is a fixed meta-parameter. Then, the gradient of the meta-objective with respect to the meta-parameters $\eta$ is obtained by applying the chain rule:
 
 \[\frac{\partial \bar{J}\left(\tau^{\prime}, \theta^{\prime}, \bar{\eta}\right)}{\partial \eta}=\frac{\partial \bar{J}\left(\tau^{\prime}, \theta^{\prime}, \bar{\eta}\right)}{\partial \theta^{\prime}} \frac{\mathrm{d} \theta^{\prime}}{\mathrm{d} \eta}\]
 
-Finally, $\Delta\eta$ is calculated to maximize the meta-objective:
+The term $\frac{\mathrm{d} \theta^{\prime}}{\mathrm{d} \eta}$ can be calculated as follows:
+
+\begin{align*}
+	\frac{\mathrm{d} \theta^{\prime}}{\mathrm{d} \eta}&=\frac{\mathrm{d} \theta}{\mathrm{d} \eta}+\frac{\partial f(\tau, \theta, \eta)}{\partial \eta}+\frac{\partial f(\tau, \theta, \eta)}{\partial \theta} \frac{\mathrm{d} \theta}{\mathrm{d} \eta} \\
+	&=\left(\mathrm{I}+\frac{\partial f(\tau, \theta, \eta)}{\partial \theta}\right) \frac{\mathrm{d} \theta}{\mathrm{d} \eta}+\frac{\partial f(\tau, \theta, \eta)}{\partial \eta}
+\end{align*}
+
+In practice, the gradient $\partial f(\tau, \theta, \eta) / \partial \theta$ is large and challenging to compute, because it is a N x N matrix, where N is the number of parameters in $\theta$. Therefore, a simple approximation is to set $\partial f(\tau, \theta, \eta) / \partial \theta=0$, which is especially cheap to compute. Finally, $\Delta\eta$ is calculated as follows to maximize the meta-objective:
 
 \[\Delta \eta = -\beta \frac{\partial \bar{J}(\tau', \theta', \bar{\eta})}{\partial \theta'} \frac{\partial f(\tau, \theta, \eta)}{d\eta}\]
 
 where $\beta$ is the learning rate for updating $\eta$.
 
 \par
-The validation of meta-gradient algorithm is executed on Arcade Learning Environment with an agent built with the IMPALA framework. The agents are evaluated on 57 different Atari games. The result is shown below:
+The validation of meta-gradient algorithm is executed on Arcade Learning Environment with an agent built with the IMPALA framework. The agents are evaluated on 57 different Atari games and the median of human-normalised scores are documented in the following table:
 \begin{figure}[H]
 	\includegraphics[scale=0.3]{meta-gradient-result.png}
 	\centering

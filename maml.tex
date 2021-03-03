@@ -27,7 +27,7 @@ The key point behind this approach is the transferability of internal representa
 	\label{MAML}
 \end{figure}
 
-The principle of the algorithm refers to gradient by gradient，which means two gradient descents are conducted during the meta-training process. When applied to new tasks, the parameters of model $\theta$ become $\theta_{i}^{\prime}$. The updated parameter vector $\theta_{i}^{\prime}$ is computed by doing the first gradient descent on each task $\mathcal{T}_{i}$ among batch of tasks, which is denoted as:
+The principle of the algorithm refers to gradient by gradient, which means two gradient descents are conducted during the meta-training process. When applied to new tasks, the parameters of model $\theta$ become $\theta_{i}^{\prime}$. The updated parameter vector $\theta_{i}^{\prime}$ is computed by doing the first gradient descent on each task $\mathcal{T}_{i}$ among batch of tasks, which is denoted as:
 
 $$\theta_{i}^{\prime}=\theta-\alpha \nabla_{\theta} \mathcal{L}_{\mathcal{T}_{i}}\left(f_{\theta}\right)$$
 where $\alpha$ represents step size fixed as hyperparameter and $\mathcal{L}_{\mathcal{T}_{i}}$ is loss of corresponding task.
@@ -73,7 +73,7 @@ In $K$ -shot reinforcement learning, $K$ trajectories are sampled from the envir
 
 Several experiments are conducted to evaluate the performance of MAML on reinforcement learning tasks. Among these experiments a neural network policy is trained as model with  two hidden layers of size 100, and ReLU nonlinearities. The gradient updates are computed using vanilla policy gradient (REINFORCE) [9], and we use trust-region policy optimization (TRPO) [10] as the meta-optimizer
 
-The first meta-RL evaluation is in the domain of 2$D$ Navigation, where  a goal position, that a point agent is expected to reach, is chosen randomly in a unit square. The state is the current 2$D$position, and actions correspond to velocity control in the range [−0.1, 0.1]. What's more, the reward is the negative squared distance to the goal. The aim is to maximize the return by training neural network policy with the architecture of MAML.
+The first meta-RL evaluation is in the domain of 2$D$ Navigation, where  a goal position, that a point agent is expected to reach, is chosen randomly in a unit square. The state is the current 2$D$position, and actions correspond to velocity control in the range [-0.1, 0.1]. What's more, the reward is the negative squared distance to the goal. The aim is to maximize the return by training neural network policy with the architecture of MAML.
 
 \begin{figure}[H]
 	\includegraphics[scale=0.8]{MAML_04.PNG}
