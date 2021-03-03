@@ -12,8 +12,8 @@ where $\theta^*$ is the updated parameter $\theta$, $\mathcal{M}$ is a sampled M
 where $p(\mathcal{M})$ is a distribution over MDPs, $\pi_{\theta^*}$ is the agent's policy trained with the loss function $L_\phi$ and $R_\tau = \sum_{t=0}^{H}\gamma^t{r_t}$ is the discounted episodic return of $\tau$. The goal of the outer loop is to achieve high expected returns in the MDP distribution.
 
 \par
-Pseudocode of EPG algorithm is shown below:
-\begin{figure}[H]
+Pseudocode of EPG algorithm is shown in Fig. \ref{epg}:
+\begin{figure}
 	\includegraphics[scale=0.4]{epg.png}
 	\centering
 	\caption{EPG algorithm.}
@@ -36,8 +36,8 @@ At the end of the inner-loop training, the return $R_\omega$ is returned by each
 where $\delta_{out}$ is the learning rate and $F(\phi+\sigma\epsilon_v) = \frac{R_{(v-1)*W/V+1}+...+R_{v*W/V}}{W/V}$.
 
 \par
-The architecture of the loss function can be seen in the following figure:
-\begin{figure}[H]
+The architecture of the loss function can be seen in Fig. \ref{loss-architecture}:
+\begin{figure}
 	\includegraphics[scale=0.5]{loss-architecture.png}
 	\centering
 	\caption{Architecture of loss function $L_\phi$.}
@@ -70,3 +70,4 @@ This algorithm is evaluated under several randomized continuous control MuJoCo e
 	\caption{RandomReacher testtime training over 512 (policy updates) x128 (update frequency) = 65536 timesteps: PG vs no-reward EPG.}
 	\label{reacher}
 \end{figure}
+We can see from these figures that EPG agents learn more quickly and obtain higher returns compared to PPO agents.
