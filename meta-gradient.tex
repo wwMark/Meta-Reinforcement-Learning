@@ -37,14 +37,15 @@ In practice, the gradient $\partial f(\tau, \theta, \eta) / \partial \theta$ is 
 where $\beta$ is the learning rate for updating $\eta$.
 
 \par
-The validation of meta-gradient algorithm is executed on Arcade Learning Environment with an agent built with the IMPALA framework. The agents are evaluated on 57 different Atari games and the median of human-normalised scores are documented in the following table:
+The validation of meta-gradient algorithm is executed on Arcade Learning Environment with an agent built with the IMPALA framework. The agents are evaluated on 57 different Atari games and the scores are documented in the following table:
 \begin{figure}[H]
 	\includegraphics[scale=0.3]{meta-gradient-result.png}
 	\centering
 	\caption{Experiment result of meta-gradient algorithm. "Human starts" means episodes are initialized to a state that is randomly sampled from human play, while "No-op starts" means each episode is initialized with a random sequence of no-op actions.}
 	\label{meta-gradient-result}
 \end{figure}
-We can see that meta-gradient algorithm has a better performance than the baseline IMPALA algorithm.
+Four variants of IMPALA algorithm are evaluated. The first one is the baseline algorithm, while the other three are the variants with meta-gradient improvement upon different meta-parameter $\eta$. The entries of this table are the median of human-normalised scores. We can see from this table that the improved IMPALA algorithms perform better than the baseline one in the most scenes. In addition, it is interesting that meta-gradient improvement upon more meta-parameters does not always yield a better performance. Furthermore, meta-gradient algorithm upon the discount factor $\gamma$ can improved the performance much better in compare with the one upon the bootstrapping parameter $\lambda$.
+%We can see that meta-gradient algorithm has a better performance than the baseline IMPALA algorithm.
 % 
 % 
 % 

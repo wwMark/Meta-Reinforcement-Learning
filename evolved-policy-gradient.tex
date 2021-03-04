@@ -51,23 +51,49 @@ As depicted in the diagram above, the architecture contains a memory unit, which
 In addition, the architecture consists of temporal convolutional layers which generate a context vector $f_{context}$, and dense layers, which output the loss. The dense layer outputs the loss function \textit{$L_t$} at time step t by taking a batch of \textit{M} sequential samples $\{{s_i,a_i,d_i},mem,f_{context},\pi_\theta(\cdot|s_i)\}^t_{i=t-M}$. To generate the context vector, first, the data samples $\{{s_i,a_i,d_i},mem,\pi_\theta(\cdot|s_i)\}^t_{i=t-N}$ are stack together to form a matrix, second, this matrix is processed by the temporal convolutional layers which outputs the context vector $f_context$.
 
 \par
-This algorithm is evaluated under several randomized continuous control MuJoCo environments. For example, the following diagrams show results on RandomHopper, RandomWalker and RandomReacher.
-\begin{figure}[H]
+This algorithm is evaluated under several randomized continuous control MuJoCo environments. Fig. \ref{hopper}, \ref{walker}, \ref{reacher} show the evaluation results on RandomHopper, RandomWalker and RandomReacher, which require the agent to identify a randomly sampled environment at test time via exploratory behavior. These diagrams show the learning curves of EPG and the off-the-shelf policy gradient method, PPO, under different settings. We can see that EPG agents learn more quickly and obtain higher returns compared to PPO agents.
+
+\begin{figure}
 	\includegraphics[scale=0.6]{hopper.png}
 	\centering
 	\caption{RandomHopper testtime training over 128 (policy updates) x64 (update frequency) = 8196 timesteps: PPO vs no-reward EPG.}
 	\label{hopper}
 \end{figure}
-\begin{figure}[H]
+\begin{figure}
 	\includegraphics[scale=0.6]{walker.png}
 	\centering
 	\caption{RandomWalker testtime training over 256 (policy updates) x128 (update frequency) = 32768 timesteps: PPO vs no-reward EPG.}
 	\label{walker}
 \end{figure}
-\begin{figure}[H]
+\begin{figure}
 	\includegraphics[scale=0.6]{reacher.png}
 	\centering
 	\caption{RandomReacher testtime training over 512 (policy updates) x128 (update frequency) = 65536 timesteps: PG vs no-reward EPG.}
 	\label{reacher}
 \end{figure}
-We can see from these figures that EPG agents learn more quickly and obtain higher returns compared to PPO agents.
+
+\par
+Fig. \ref{goal-ant}, \ref{metatrained-direction} and \ref{generalization-direction} show the ability of generalization of EPG. During metatraining, goals are randomly sampled on the positive x-axis (ant walking to the right) and at test time, goals are sampled from the negative x-axis (ant walking to the left). This task is illustrated in Fig. \ref{goal-ant}. Achieving generalization to the left side is not trivial, since it may be easy for a metalearner to overfit to the task metatraining distribution. As shown in Fig. \ref{metatrained-direction}, by training, $RL^2$ converges very fast, while EPG's performance catch up with $RL^2$ after 8192 steps. MAML achieves approximately the same final performance after taking a single SGD step (based on 8000 sampled steps).
+
+\par
+But when it comes to the generalization phase, as seen in Fig. \ref{generalization-direction}, the $RL^2$ and MAML algorithm are trapped by overfitting and yield negative result, while EPG trains the agent very quickly to the unseen task.
+%We can see from these figures that EPG agents learn more quickly and obtain higher returns compared to PPO agents.
+
+\begin{figure}
+	\includegraphics[scale=0.5]{goal-ant-task.png}
+	\centering
+	\caption{GoalAnt task illustration.}
+	\label{goal-ant}
+\end{figure}
+\begin{figure}
+	\includegraphics[scale=0.5]{metatrained-direction.png}
+	\centering
+	\caption{Metatrained direction.}
+	\label{metatrained-direction}
+\end{figure}
+\begin{figure}
+	\includegraphics[scale=0.5]{generalization-direction.png}
+	\centering
+	\caption{Generalization direction.}
+	\label{generalization-direction}
+\end{figure}
