@@ -11,7 +11,7 @@ $\mathcal{T}=\left\{\mathcal{L}\left(\mathbf{x}_{1}, \mathbf{a}_{1}, \ldots, \ma
 an episode length $\mathcal{H}$.
 
 \begin{figure}[H]
-	\includegraphics[scale=0.6]{MAML_01.JPG}
+	\includegraphics[scale=0.4]{MAML_01.JPG}
 	\centering
 	\caption{Diagram of model-agnostic meta-learning algorithm (MAML), which optimizes for a representation $\theta$ that can
     quickly adapt to new tasks}
@@ -62,7 +62,7 @@ Wenn MAML is applied to reinforcement learning, the core idea and the algorithm 
  
  where ${H}$ is horizon, which indicates  a limited number of sample trajectories in meta-RL.
  \begin{figure}[H]
-	\includegraphics[scale=0.6]{MAML_03.PNG}
+	\includegraphics[scale=0.55]{MAML_03.PNG}
 	\centering
 	\caption{MAML for Reinforcement Learning
 }
@@ -76,7 +76,7 @@ Several experiments are conducted to evaluate the performance of MAML on reinfor
 The first meta-RL evaluation is in the domain of 2$D$ Navigation, where  a goal position, that a point agent is expected to reach, is chosen randomly in a unit square. The state is the current 2$D$position, and actions correspond to velocity control in the range [-0.1, 0.1]. What's more, the reward is the negative squared distance to the goal. The aim is to maximize the return by training neural network policy with the architecture of MAML.
 
 \begin{figure}[H]
-	\includegraphics[scale=0.8]{MAML_04.PNG}
+	\includegraphics[scale=0.6]{MAML_04.PNG}
 	\centering
 	\caption{ quantitative results from 2$D$ navigation task}
 	\label{MAML}

@@ -43,7 +43,7 @@ Except for the notation of MDP, the reinforcement learning framework also consis
 \par
 In the framework of meta-reinforcement learning, a reinforcement learning model is extended to Fig. \ref{meta-model}:
 
-\begin{figure}[H]
+\begin{figure}
 	\includegraphics[scale=0.35]{meta-rl.png}
 	\centering
 	\caption{Schematic of meta-reinforcement Learning. The outer loop trains the parameter weights $\theta$, which determine the inner-loop learner ("Agent", instantiated by a recurrent neural network) that interacts with an environment for the duration of the episode. For every cycle of the outer loop, a new environment is sampled from a distribution of environments, which share some common structure\cite{meta-model}.}

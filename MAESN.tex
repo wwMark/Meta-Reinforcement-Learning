@@ -7,7 +7,7 @@ The core idea of this gradient-based algorithm is to use prior experience both t
 \subsection{ Meta-Learning Latent Variable Policies}
 The conventional action distribution in reinforcement learning is written as $\pi_{\theta}(a \mid s)$, which possesses no property of temporally coherent randomness throughout the trajectory because it is independent for each time step. To address this problem we introduce latent variables $Z$. 
 \begin{figure}[H]
-	\includegraphics[scale=0.6]{MAESN_01.PNG}
+	\includegraphics[scale=0.3]{MAESN_01.PNG}
 	\centering
 	\caption{latent variables}
 	\label{MAESN}
@@ -18,7 +18,7 @@ The conventional action distribution in reinforcement learning is written as $\p
 Our aim is to meta-train the latent variable conditioned policy to generate coherent exploration strategies that perform faster adaptation on new tasks. Briefly, we jointly learn a set of policy parameters $\theta$ and the parameters of latent space distribution $w$, such that a policy gradient adaptation step can lead to maximal rewards.
 
 \begin{figure}[H]
-	\includegraphics[scale=0.7]{MAESN_02.PNG}
+	\includegraphics[scale=0.6]{MAESN_02.PNG}
 	\centering
 	\caption{Computation graph for MAESN}
 	\label{MAESN}
@@ -87,19 +87,19 @@ In Legged Locomotion, an ant walks to randomly placed goals, which requires care
 In the same time we compare MAESN with other 6 exploration approaches during meta-test on each task distribution, that are RL$^2$, MAML, simply learning latent spaces without fast adaptation(LatentSpace), TRPO, REINFORCE, and training from scratch with VIME. 
 
 \begin{figure}[H]
-	\includegraphics[scale=0.6]{MAESN_09.PNG}
+	\includegraphics[scale=0.5]{MAESN_09.PNG}
 	\centering
 	\caption{results of Robotic Manipulation}
 	\label{MAESN}
 \end{figure}
 \begin{figure}[H]
-	\includegraphics[scale=0.6]{MAESN_10.PNG}
+	\includegraphics[scale=0.5]{MAESN_10.PNG}
 	\centering
 	\caption{results of Wheeled Locomotion}
 	\label{MAESN}
 \end{figure}
 \begin{figure}[H]
-	\includegraphics[scale=0.6]{MAESN_11.PNG}
+	\includegraphics[scale=0.5]{MAESN_11.PNG}
 	\centering
 	\caption{results of Legged Locomotion}
 	\label{MAESN}

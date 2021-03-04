@@ -12,16 +12,13 @@ where $\theta^*$ is the updated parameter $\theta$, $\mathcal{M}$ is a sampled M
 where $p(\mathcal{M})$ is a distribution over MDPs, $\pi_{\theta^*}$ is the agent's policy trained with the loss function $L_\phi$ and $R_\tau = \sum_{t=0}^{H}\gamma^t{r_t}$ is the discounted episodic return of $\tau$. The goal of the outer loop is to achieve high expected returns in the MDP distribution.
 
 \par
-Pseudocode of EPG algorithm is shown in Fig. \ref{epg}:
-\begin{figure}
+Pseudocode of EPG algorithm is shown in Fig. \ref{epg}. The algorithm works as follows: Because of adoption of evolutionary strategies, $\textit{W}$ workers will work in the inner loop. Then, at the beginning of each epoch in the outer loop, $\textit{V}$ multivariate normal vectors $\epsilon_v \in \mathcal{N}(0,I)$ of the same dimension as the loss function parameter $\phi$ are generated and assigned to $\textit{V}$ loss functions $L_v = L_{\phi+\delta\epsilon_v}$ respectively, with $\textit{v}$ being the $\textit{v}$-th generated perturbed parameters. Then $\textit{W}$ workers are divided into $\textit{V}$ groups and each group obtain the $\textit{v}$-th loss function.
+\begin{figure}[H]
 	\includegraphics[scale=0.4]{epg.png}
 	\centering
 	\caption{EPG algorithm.}
 	\label{epg}
 \end{figure}
-
-\par
-The algorithm works as follows: Because of adoption of evolutionary strategies, $\textit{W}$ workers will work in the inner loop. Then, at the beginning of each epoch in the outer loop, $\textit{V}$ multivariate normal vectors $\epsilon_v \in \mathcal{N}(0,I)$ of the same dimension as the loss function parameter $\phi$ are generated and assigned to $\textit{V}$ loss functions $L_v = L_{\phi+\delta\epsilon_v}$ respectively, with $\textit{v}$ being the $\textit{v}$-th generated perturbed parameters. Then $\textit{W}$ workers are divided into $\textit{V}$ groups and each group obtain the $\textit{v}$-th loss function.
 
 \par
 Afterwards, the inner loop launches, each worker samples a random MDP from the task distribution $\mathcal{M}_\omega\thicksim p(\mathcal{M})$ and trains the policy $\pi_\theta$ along with the loss function $L_v$ given from the outer loop and updates the parameter $\theta$ with learning rate $\delta_{in}$ as follows:
@@ -53,19 +50,19 @@ In addition, the architecture consists of temporal convolutional layers which ge
 \par
 This algorithm is evaluated under several randomized continuous control MuJoCo environments. Fig. \ref{hopper}, \ref{walker}, \ref{reacher} show the evaluation results on RandomHopper, RandomWalker and RandomReacher, which require the agent to identify a randomly sampled environment at test time via exploratory behavior. These diagrams show the learning curves of EPG and the off-the-shelf policy gradient method, PPO, under different settings. We can see that EPG agents learn more quickly and obtain higher returns compared to PPO agents.
 
-\begin{figure}
+\begin{figure}[H]
 	\includegraphics[scale=0.6]{hopper.png}
 	\centering
 	\caption{RandomHopper testtime training over 128 (policy updates) x64 (update frequency) = 8196 timesteps: PPO vs no-reward EPG.}
 	\label{hopper}
 \end{figure}
-\begin{figure}
+\begin{figure}[H]
 	\includegraphics[scale=0.6]{walker.png}
 	\centering
 	\caption{RandomWalker testtime training over 256 (policy updates) x128 (update frequency) = 32768 timesteps: PPO vs no-reward EPG.}
 	\label{walker}
 \end{figure}
-\begin{figure}
+\begin{figure}[H]
 	\includegraphics[scale=0.6]{reacher.png}
 	\centering
 	\caption{RandomReacher testtime training over 512 (policy updates) x128 (update frequency) = 65536 timesteps: PG vs no-reward EPG.}
@@ -79,19 +76,19 @@ Fig. \ref{goal-ant}, \ref{metatrained-direction} and \ref{generalization-directi
 But when it comes to the generalization phase, as seen in Fig. \ref{generalization-direction}, the $RL^2$ and MAML algorithm are trapped by overfitting and yield negative result, while EPG trains the agent very quickly to the unseen task.
 %We can see from these figures that EPG agents learn more quickly and obtain higher returns compared to PPO agents.
 
-\begin{figure}
+\begin{figure}[H]
 	\includegraphics[scale=0.5]{goal-ant-task.png}
 	\centering
 	\caption{GoalAnt task illustration.}
 	\label{goal-ant}
 \end{figure}
-\begin{figure}
+\begin{figure}[H]
 	\includegraphics[scale=0.5]{metatrained-direction.png}
 	\centering
 	\caption{Metatrained direction.}
 	\label{metatrained-direction}
 \end{figure}
-\begin{figure}
+\begin{figure}[H]
 	\includegraphics[scale=0.5]{generalization-direction.png}
 	\centering
 	\caption{Generalization direction.}
