@@ -1,11 +1,11 @@
-In this part, we introduce an approach of meta reinforcement learning for solving the problem of exploration, which is named model agnostic exploration with structured noise (MAESN) [12]. With the method an agent can be enabled to explore more effectively in new situations based on prior experience.
+In this part, we introduce Model Agnostic Exploration with Structured Noise (MAESN) [8], by which an agent can be enabled to explore more effectively in new situations based on prior experience.
 \subsection{overview}
-It is well-known that exploration is a critical task in reinforcement learning. As the practical tasks are becoming more and more complex, the prior proposed exploration strategies, such as information gain [13] or state visitation bonuses [14], perform not as well as expected, especially for multi-task problems. The approach model agnostic exploration with structured noise (MAESN), that has a combination of structured stochasticity with MAML, offers exploration strategies that are informed by prior knowledges and are more effective than random action-space noise.
+ %As practical tasks are getting more and more complicated, the prior proposed exploration strategies, such as information gain [13] or state visitation bonuses [14], perform not as well as expected. The approach Model Agnostic Exploration with Structured Noise (MAESN), offers exploration strategies that are informed by prior knowledges and are more effective than random action-space noise.
 
-The core idea of this gradient-based algorithm is to use prior experience both to initialize a policy and to learn a latent exploration space, by which the structured stochasticity injected policy can produce more effective exploration strategies on new task.
+The core idea of this gradient-based algorithm is to use prior experience both to initialize a policy and to learn a latent exploration space, by which the structured stochasticity injected policy can produce more effective exploration strategies on new tasks.
 
 \subsection{ Meta-Learning Latent Variable Policies}
-The conventional action distribution in reinforcement learning is written as $\pi_{\theta}(a\mid s)$, which possesses no property of temporally coherent randomness throughout the trajectory because it is independent for each time step. To address this problem we introduce latent variables $Z$. 
+The conventional action distribution in reinforcement learning is written as $\pi_{\theta}(a \mid s)$, which possesses no property of temporally coherent randomness throughout the trajectory because it is independent for each time step. To address this problem we introduce latent variables $Z$. 
 \begin{figure}[H]
 	\includegraphics[scale=0.6]{MAESN_01.PNG}
 	\centering
@@ -34,7 +34,7 @@ The full meta-training problem can be stated mathematically as:
 	\label{MAESN}
 \end{figure}
 
-The structure of training here is the same as the one in MAML, where two-level gradient is contained. The inner policy gradient is performed on the variational parameters for each task to get post-update parameters $\theta_{i}^{\prime}, \omega_{i}^{\prime}$, and then a meta-gradient is conducted to obtain $\theta$,$\omega_{0}$,$\omega_{1}$,...,$\omega_{N}$.
+The structure of training here is the same as the one in MAML, where two-level gradient is contained. The inner policy gradient is performed on the variational parameters for each task to get post-update parameters $\theta_{i}^{\prime}, \omega_{i}^{\prime}$, and then a meta-gradient is conducted to obtain $\theta$, $\omega_{0}$, $\omega_{1}$, ..., $\omega_{N}$.
 
 \begin{figure}[H]
 	\includegraphics[scale=0.34]{MAESN_04.PNG}
@@ -84,7 +84,7 @@ In Legged Locomotion, an ant walks to randomly placed goals, which requires care
 	\caption{Legged Locomotion}
 	\label{MAESN}
 \end{figure}
-In the same time we compare MAESN with other 6 exploration approaches during meta-test on each task distribution, that are RL$^2$ [15], MAML, simply learning latent spaces without fast adaptation(LatentSpace), TRPO, REINFORCE, and training from scratch with VIME [16]. 
+In the same time we compare MAESN with other 6 exploration approaches during meta-test on each task distribution, that are RL$^2$, MAML, simply learning latent spaces without fast adaptation(LatentSpace), TRPO, REINFORCE, and training from scratch with VIME. 
 
 \begin{figure}[H]
 	\includegraphics[scale=0.6]{MAESN_09.PNG}
